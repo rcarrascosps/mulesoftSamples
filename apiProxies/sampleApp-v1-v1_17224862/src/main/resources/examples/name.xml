@@ -1,0 +1,10 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:hel="http://learnwebservices.com/services/hello">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <hel:SayHello>
+         <hel:HelloRequest>
+            <hel:Name>Mexico</hel:Name>
+         </hel:HelloRequest>
+      </hel:SayHello>
+   </soapenv:Body>
+</soapenv:Envelope>

@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<types:mule xmlns:types="http://www.mulesoft.org/schema/mule/types">
+  <types:catalog>
+    <types:type name="jsonIN" format="json">
+      <types:shape format="weave" example="examples/name.json"><![CDATA[%dw 2.0
+
+type jsonIN = {| name: String |} {"example": "{\\\"name\\\":\\\"rolando\\\"}"}
+
+]]></types:shape>
+    </types:type>
+    <types:type name="xmlIN" format="xml">
+      <types:example format="xml" element="{http://schemas.xmlsoap.org/soap/envelope/}Envelope" location="examples/name.xml"/>
+    </types:type>
+    <types:type name="xmlOUT" format="xml">
+      <types:example format="xml" element="{http://schemas.xmlsoap.org/soap/envelope/}Envelope" location="examples/xmlOUT.xml"/>
+    </types:type>
+    <types:type name="jsonOUT" format="json">
+      <types:shape format="weave" example="examples/jsonOUT.txt"><![CDATA[%dw 2.0
+
+type jsonOUT = {| Message: String |} {"example": "{\\\"Message\\\":\\\"Hello Rolando\\\"}"}
+
+]]></types:shape>
+    </types:type>
+  </types:catalog>
+  <types:enrichment select="#22e97af0-36da-4544-85b1-62a51cfbf298">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="jsonIN"/>
+        </types:message>
+      </types:input-event>
+      <types:output-event>
+        <types:message>
+          <types:payload type="xmlIN"/>
+        </types:message>
+      </types:output-event>
+    </types:processor-declaration>
+  </types:enrichment>
+  <types:enrichment select="#a28469a8-54be-401b-8dab-5d6aca4f337f">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="xmlOUT"/>
+        </types:message>
+      </types:input-event>
+      <types:output-event>
+        <types:message>
+          <types:payload type="jsonOUT"/>
+        </types:message>
+      </types:output-event>
+    </types:processor-declaration>
+  </types:enrichment>
+</types:mule>
